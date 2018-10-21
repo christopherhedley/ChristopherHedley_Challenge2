@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour {
     //audio stuff
     private AudioSource source;
     public AudioClip jumpClip;
-    public AudioClip deathClip;
     public AudioClip coinClip;
     private float volLowRange = .5f;
     private float volHighRange = 1.0f;
@@ -43,6 +42,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update(){
+
 
      
     }
@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour {
         else if (other.gameObject.CompareTag("Deadly"))
         {
             gameObject.SetActive(false);
-            float vol = Random.Range(volLowRange, volHighRange); source.PlayOneShot(deathClip);
         }
 
 
@@ -112,7 +111,8 @@ public class PlayerController : MonoBehaviour {
                // rb2d.AddForce(new Vector2(0, jumpforce), ForceMode2D.Impulse);
                rb2d.velocity = Vector2.up * jumpforce;
 
-                float vol = Random.Range(volLowRange, volHighRange); source.PlayOneShot(jumpClip);
+                float vol = Random.Range(volLowRange, volHighRange);
+                source.PlayOneShot(jumpClip);
 
             }
         }

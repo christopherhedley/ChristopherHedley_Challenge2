@@ -28,12 +28,17 @@ public class GoombaController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
         
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Awake()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
+
+    // Update is called once per frame
+    void Update () {
         transform.Translate(speed * Time.deltaTime, 0, 0);
 
     }
@@ -52,12 +57,13 @@ public class GoombaController : MonoBehaviour {
         {
             speed = speed * -1;
         }
-     
+
 
 
         headHit = Physics2D.OverlapBox(headHitbox.position, new Vector2(headHitWidth, headHitHeight), 0, isPlayer);
         if (headHit == true)
         {
+            
             gameObject.SetActive(false);
             float vol = Random.Range(volLowRange, volHighRange); source.PlayOneShot(stompClip);
         }
@@ -72,6 +78,13 @@ public class GoombaController : MonoBehaviour {
             other.gameObject.SetActive(false);
             float vol = Random.Range(volLowRange, volHighRange); source.PlayOneShot(deathClip);
         }
+
+        if (other.gameObject.CompareTag("Goomba"))
+        {
+            speed = speed * -1;
+        }
     }
+
+    
 
 }
